@@ -1,0 +1,41 @@
+
+<select name="pagina" ng-model="pagina" ng-change="init()">
+	<option value="10">10 Pages</option>
+	<option value="20">20 Pages</option>
+	<option value="30">30 Pages</option>
+</select>
+
+<table class="table table-condensed">
+	<thead>
+		<tr>
+		<th>counter</th>
+		<th><a href ng-click="sortBy('id')"># {{sortIconFor('id')}}</a><br><input type="text" name="id" ng-model="search.id"></th>
+		<th><a href ng-click="sortBy('name')">Name {{sortIconFor('name')}}</a><br><input type="text" name="id" ng-model="search.name"></th>
+		<th><a href ng-click="sortBy('price')">Price {{sortIconFor('price')}}</a><br><input type="text" name="id" ng-model="search.price"></th>
+		<th><a href ng-click="sortBy('bid')">Rating {{sortIconFor('bid')}}</a><br><input type="text" name="id" ng-model="search.bid"></th>
+	</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="userData in userData | filter:search | startFrom:activePage*pagina | limitTo:pagina">
+			<td>{{$index + 1 + (activePage * pagina)}}</td>
+			<td>{{userData.id}}</td>
+			<td>{{userData.name}}</td>
+			<td>{{userData.price}}</td>
+			<td>{{userData.bid}}</td>
+		</tr>
+	</tbody>
+	
+	<tfoot>
+		<tr>
+			<td colspan="4">
+
+				<pagination-table></pagination-table>
+
+				
+
+
+			</td>
+		</tr>
+
+	</tfoot>
+</table>

@@ -1,0 +1,11 @@
+<div class="pagination_block">
+	<input type="button" class="btn" ng-disabled="activePage==0" value="First" ng-click="activePage=0">
+	<input type="button" class="btn" ng-disabled="activePage==0" value="Prev." ng-click="activePage=activePage-1">
+	<!-- <div >
+		<input type="button" value='{{pages}}''>
+		
+	</div> to do -->
+	{{activePage}} / {{pages}}
+	<input type="button" class="btn" value="Next." ng-disabled="activePage==pages" ng-click="activePage=activePage+1">
+	<input type="button" class="btn" ng-disabled="activePage==pages" value="Last" ng-click="activePage=pages">
+</div>
