@@ -8,11 +8,11 @@
 <table class="table table-condensed">
 	<thead>
 		<tr>
-		<th>counter</th>
-		<th><a href ng-click="sortBy('id')"># {{sortIconFor('id')}}</a><br><input type="text" name="id" ng-model="search.id"></th>
-		<th><a href ng-click="sortBy('name')">Name {{sortIconFor('name')}}</a><br><input type="text" name="id" ng-model="search.name"></th>
-		<th><a href ng-click="sortBy('price')">Price {{sortIconFor('price')}}</a><br><input type="text" name="id" ng-model="search.price"></th>
-		<th><a href ng-click="sortBy('bid')">Rating {{sortIconFor('bid')}}</a><br><input type="text" name="id" ng-model="search.bid"></th>
+		<th>Count.</th>
+		<th><a href ng-click="sortBy('id')"># {{sortIconFor('id')}}</a><br><input type="text" name="id" ng-model="search.id" class="span2"></th>
+		<th><a href ng-click="sortBy('name')">Name {{sortIconFor('name')}}</a><br><input type="text" name="id" ng-model="search.name" class="span5"></th>
+		<th><a href ng-click="sortBy('price')">Price {{sortIconFor('price')}}</a><br><input type="text" name="id" ng-model="search.price" class="span2"></th>
+		<th><a href ng-click="sortBy('bid')">Rating {{sortIconFor('bid')}}</a><br><input type="text" name="id" ng-model="search.bid" class="span2"></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -27,7 +27,7 @@
 	
 	<tfoot>
 		<tr>
-			<td colspan="4">
+			<td colspan="5">
 
 				<pagination-table></pagination-table>
 

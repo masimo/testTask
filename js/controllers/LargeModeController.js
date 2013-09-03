@@ -1,60 +1,53 @@
 'use strict';
 
 
-demoTask.controller('LargeModeController', function LargeModeController($scope, $http) {
+demoTask.controller('LargeModeController', function NormalModeController($scope, $http, $filter) {
+
 	$scope.pagina = 20;
 	$scope.paginationBut = 7;
 	$scope.activePage = 0;
-	
+
+	var records = $scope.records;
 	var filter = $scope.filter = {};
-
-	$scope.$watch('filterAdvanced', filterAndSortDataAdvanced, true);
-
-	function filterAndSortDataAdvanced() {
-
-		$scope.getData = function() {
-
-			$http({
-				method: 'GET',
-				url: 'data/data.json'
-			}).
-			success(function(data, status, headers, config) {
-
-				angular.forEach(data, function(value, key) {
-
-					if (!key) return;
-
-					$scope.userData.push({
-						id: value[0],
-						name: value[1],
-						price: value[2],
-						bid: value[3],
-					});
-				});
-			}).
-			error(function(data, status, headers, config) {
-				console.log('crashed');
-			});
-		}
-	};
 
 
 	$scope.$watch('filter', filterAndSortData, true);
 
+
+	$scope.$watch('records', function() {
+
+		if ($scope.records === 0) {
+			$scope.pages = 0;
+			return false
+		}
+
+		$scope.pages = Math.ceil($scope.records / $scope.pagina) - 1;
+		$scope.activePage = $scope.activePage > $scope.pages ? $scope.pages : $scope.activePage;
+
+	});
+
+
 	function filterAndSortData() {
 
-		// sort
-		$scope.userData.sort(function(a, b) {
-			if (a[filter.sortBy] > b[filter.sortBy]) {
-				return filter.sortAsc ? 1 : -1;
-			}
+		(function() { // sort
 
-			if (a[filter.sortBy] < b[filter.sortBy]) {
-				return filter.sortAsc ? -1 : 1;
-			}
 
-			return 0;
-		});
+			$scope.userData.sort(function(a, b) {
+				if (a[filter.sortBy] > b[filter.sortBy]) {
+					return filter.sortAsc ? 1 : -1;
+				}
+
+				if (a[filter.sortBy] < b[filter.sortBy]) {
+					return filter.sortAsc ? -1 : 1;
+				}
+
+				return 0;
+			});
+
+
+
+		})();
+
 	};
 
 	$scope.sortBy = function(key) {
@@ -66,14 +59,6 @@ demoTask.controller('LargeModeController', function LargeModeController($scope, 
 		}
 	};
 
-	$scope.getPagArray = function() {
-		$scope.pagArray = [];
-
-		for (var i = 0; i < Things.length; i++) {
-			Things[i]
-		};
-	};
-
 	$scope.sortIconFor = function(key) {
 		if (filter.sortBy !== key) {
 			return '';
@@ -83,8 +68,8 @@ demoTask.controller('LargeModeController', function LargeModeController($scope, 
 	};
 
 
+
 	$scope.init = function() {
-		$scope.obj = [];
 		$scope.activePage = 0;
 		$scope.userData = [];
 
@@ -102,7 +87,7 @@ demoTask.controller('LargeModeController', function LargeModeController($scope, 
 					id: value[0],
 					name: value[1],
 					price: value[2],
-					bid: value[3],
+					bid: value[3]
 				});
 
 			});
@@ -118,6 +103,10 @@ demoTask.controller('LargeModeController', function LargeModeController($scope, 
 
 	}
 
+
+
 	$scope.init();
+
+
 
 });

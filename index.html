@@ -7,16 +7,17 @@
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-
-		<div ng-controller="NavbarController">
+		<div class="body_wrap">
+			
+			<div ng-controller="NavbarController">
 				<ul class="nav">
 					<li ng-class="{active: routeIs('/')}"><a href="#/">Index</a></li>
 					<li ng-class="{active: routeIs('/large')}"><a href="#/large">Large data</a></li>
 					<li ng-class="{active: routeIs('/normal')}"><a href="#/normal">Normal data</a></li>
 				</ul>
+			</div>
+			<ng-view></ng-view>
 		</div>
-
-		<ng-view></ng-view>
 		
 		<script src="lib/angular/angular.js"></script>
 		<script src="js/app.js"></script>
