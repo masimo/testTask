@@ -29,27 +29,31 @@ demoTask.controller('LargeModeController', function NormalModeController($scope,
 
 	function filterAndSortData() {
 
-		(function() { // sort
+		// sort
+		$scope.userData.sort(function(a, b) {
+			if (a[filter.sortBy] > b[filter.sortBy]) {
+				return filter.sortAsc ? 1 : -1;
+			}
 
+			if (a[filter.sortBy] < b[filter.sortBy]) {
+				return filter.sortAsc ? -1 : 1;
+			}
 
-			$scope.userData.sort(function(a, b) {
-				if (a[filter.sortBy] > b[filter.sortBy]) {
-					return filter.sortAsc ? 1 : -1;
-				}
+			return 0;
+		});
 
-				if (a[filter.sortBy] < b[filter.sortBy]) {
-					return filter.sortAsc ? -1 : 1;
-				}
+		// sort by numbers
+		$scope.userData.sort(function(a, b) {
+			if (a[filter.sortBy] > b[filter.sortBy]) {
+				return b[filter.sortBy] - a[filter.sortBy];
+			}
 
-				return 0;
-			});
+			if (a[filter.sortBy] < b[filter.sortBy]) {
+				return a[filter.sortBy] - b[filter.sortBy];
+			}
 
-
-
-		})();
-
+		});
 	};
-
 	$scope.sortBy = function(key) {
 		if (filter.sortBy === key) {
 			filter.sortAsc = !filter.sortAsc;
